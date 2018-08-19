@@ -342,18 +342,21 @@ int count_million(int n)
 int main(int argc, char* argv[])
 {
 
-    if (argc != 3) {
-        printf("Please input two numbers\n");
-        return 0;
-    }
-    
-    int n_max = atoi(argv[1]); // Count from 1 to n_max
-    int nth = atoi(argv[2]);   // show nth alphabet
-    
-    int i, n, idx_alph, alpha, found;
+    int n_max, nth, i, n, idx_alph, alpha, found;
     unsigned long long sum;
-    
-    printf("n_max = %d, nth = %d\n", n_max, nth); // print input parameter
+
+    if (argc != 3) {
+        printf("Please input two numbers: 1. how many numbers, 2. n-th letter to find\n");
+        printf("e.g. ./a.out 1234567 888888\n");
+        printf("By default using: 100000000 and 500000\n\n");
+        n_max = 100000000;
+        nth = 500000;
+    } else {
+        n_max = atoi(argv[1]); // Count from 1 to n_max
+        nth = atoi(argv[2]);   // show nth alphabet
+    }
+
+    printf("n_max = %d, nth = %d\n\n", n_max, nth); // print input parameter
     
     for (i = 0 ; i < 26 ; i++) // initialize counter to zero
         count_alph[i] = 0;
@@ -377,9 +380,10 @@ int main(int argc, char* argv[])
     sum = 0;
     found = 0;
     alpha = -1;
+    printf("Alphabet  Counted Numbers  Cumulated Numbers\n");
     for (i = 0 ; i < 26 ; i++) {// print alphabet counter
         sum += count_alph[i];
-        printf("%c: %llu, sum: %llu\n", 'a'+i, count_alph[i], sum);
+        printf("   %c:   %11llu,   %12llu\n", 'a'+i, count_alph[i], sum);
         if (!found && sum >= nth) {
             found = 1;
             alpha = i;
@@ -387,9 +391,9 @@ int main(int argc, char* argv[])
     }
     
     if (found) {
-        printf("%d-th alphabet is %c\n", nth, 'a'+alpha);
+        printf("\n%d-th alphabet is %c\n\n", nth, 'a'+alpha);
     } else {
-        printf("%d-th alphabet not exists\n", nth);
+        printf("\n%d-th alphabet not exists\n\n", nth);
     }
     return 0;
 }
