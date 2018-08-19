@@ -134,7 +134,7 @@ int count_0_19(int n)
         strcpy(str_n, "nineteen");
         break;
     default:
-        return 0;
+        break;
     }
 
     if (size) {
@@ -212,7 +212,7 @@ int count_20_99(int n)
         break;
     
     default:
-        return 0;
+        break;
     }
     
     if (size) {   
